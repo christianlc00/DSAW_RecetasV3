@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
     // PREGUNTAR A NACHO: ¿Se puede hacer que carguen todas en index o sólo cuándo buscas?
     Receta.find().then(resultado => {
         res.render('publico_index', {
+            titulo: 'Inicio Recetas',
             recetas: resultado
         });
     }).catch(error => {
@@ -18,8 +19,12 @@ router.get('/', (req, res) => {
 
 router.get('/buscar', (req, res) => {
     let busqueda = req.query.s;
-    Receta.find().then(resultado => {
+    // Receta.find({ titulo: new RegExp(busqueda, "i"), descripcion: new RegExp(busqueda, "i") }).then(resultado => {
+    Receta.find({
+        titulo: new RegExp(busqueda, "i")
+    }).then(resultado => {
         res.render('publico_index', {
+            titulo: `Resultados de la búsqueda "${busqueda}"`,
             recetas: resultado
         });
     }).catch(error => {

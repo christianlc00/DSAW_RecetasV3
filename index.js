@@ -80,6 +80,7 @@ let upload = multer({
 });
 
 // Añadir la librería Bootstrap
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 // Asociar el enrutador routes/publico.js con el prefijo / (ruta raíz)
@@ -94,5 +95,6 @@ app.use('/auth', auth);
 
 
 // Poner en marcha el servidor Express por el puerto 3000
-let puerto = process.env.PORT || 443
-app.listen(puerto);
+// let puerto = process.env.PORT || 443
+// app.listen(puerto);
+app.listen(3000);
