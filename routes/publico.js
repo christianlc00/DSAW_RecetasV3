@@ -5,21 +5,23 @@ let Receta = require(__dirname + '/../models/receta.js');
 let router = express.Router();
 
 router.get('/', (req, res) => {
-    // res.render('publico_index');
-    // PREGUNTAR A NACHO: ¿Se puede hacer que carguen todas en index o sólo cuándo buscas?
     Receta.find().then(resultado => {
         res.render('publico_index', {
             titulo: 'Inicio Recetas',
             recetas: resultado
         });
     }).catch(error => {
-        // Aquí podríamos renderizar una página de error
+        res.render('publico_error', {
+            error: {
+                titulo: 'Error en la aplicación',
+                mensaje: error
+            }
+        });
     });
 });
 
 router.get('/buscar', (req, res) => {
     let busqueda = req.query.s;
-    // Receta.find({ titulo: new RegExp(busqueda, "i"), descripcion: new RegExp(busqueda, "i") }).then(resultado => {
     Receta.find({
         titulo: new RegExp(busqueda, "i")
     }).then(resultado => {
@@ -28,7 +30,27 @@ router.get('/buscar', (req, res) => {
             recetas: resultado
         });
     }).catch(error => {
-        // Aquí podríamos renderizar una página de error
+        res.render('publico_error', {
+            error: {
+                titulo: 'Error en la aplicación',
+                mensaje: error
+            }
+        });
+    });
+});
+
+router.get('/receta/:id', (req, res) => {
+    Receta.findById(req.params.id).then(resultado => {
+        res.render('publico_receta', {
+            receta: resultado
+        });
+    }).catch(error => {
+        res.render('publico_error', {
+            error: {
+                titulo: 'Error',
+                mensaje: 'Receta no encontrada'
+            }
+        });
     });
 });
 

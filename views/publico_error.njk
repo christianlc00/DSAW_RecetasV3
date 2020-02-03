@@ -3,8 +3,8 @@
     Error | Recetas
 {% endblock %}
 {% block contenido %}
-    <h1>Ficha de un contacto</h1>
-    <p><strong>Nombre:</strong> {{ contacto.nombre }}</p>
-    <p><strong>Edad:</strong> {{ contacto.edad }}</p>
-    <p><strong>Teléfono:</strong> {{ contacto.telefono }}</p>
+    <div class="alert alert-danger mt-5" role="alert">
+        <h4 class="alert-heading">{{ error.titulo }}</h4>
+        <p>{{ error.mensaje }}</p>
+    </div>
 {% endblock %}

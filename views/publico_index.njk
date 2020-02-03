@@ -12,10 +12,17 @@
                     <h5 class="card-title">{{ receta.titulo }}</h5>
                     <p class="card-text">{{ receta.comensales }} comensales</p>
                     <p class="card-text">
-                        <small class="text-muted"><strong>Preparación:</strong> {{ receta.preparacion }} min. - <strong>Cocción:</strong> {{ receta.coccion }} min.</small>
+                        <small class="text-muted">
+                            {{ receta._id }}
+                            <strong>Preparación:</strong>
+                            {{ receta.preparacion }} min. - <strong>Cocción:</strong>
+                            {{ receta.coccion }} min.
+                        </small>
                     </p>
                 </div>
             </div>
+        {% else %}
+            <p>No se encontraron recetas.</p>
         {% endfor %}
     </div>
 {% endblock %}

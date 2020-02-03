@@ -3,8 +3,45 @@
     Detalle Receta | Recetas
 {% endblock %}
 {% block contenido %}
-    <h1>Ficha de un contacto</h1>
-    <p><strong>Nombre:</strong> {{ contacto.nombre }}</p>
-    <p><strong>Edad:</strong> {{ contacto.edad }}</p>
-    <p><strong>Teléfono:</strong> {{ contacto.telefono }}</p>
+    <div class="row">
+        <div class="col-12">
+            <h1>Detalles de la receta</h1>
+        </div>
+        <div class="col-6">
+            <strong>Título:</strong>
+            {{ receta.titulo }}
+        </div>
+        <div class="col-6">
+            <strong>Número de comensales:</strong>
+            {{ receta.comensales }}
+        </div>
+        <div class="col-6">
+            <strong title="Tiempo de preparación">
+                <i class="far fa-clock"></i>
+                <span class="fa-layers fa-fw">
+                    {# <i class="far fa-clock" data-fa-transform="rotate--90 grow-2"></i> #}
+                    <i class="fas fa-fire" data-fa-transform="grow-5"></i>
+                    <i class="fas fa-clock text-white" data-fa-transform="shrink-10 down-4.2 right-3.8"></i>
+                    {# <i class="fas fa-sun fa-inverse" data-fa-transform="shrink-10 up-2"></i>
+                    <i class="fas fa-moon fa-inverse" data-fa-transform="shrink-11 down-4.2 left-4"></i>
+                    <i class="fas fa-star fa-inverse" ></i> #}
+                </span>
+            </strong>
+            {{ receta.preparacion }}
+        </div>
+        <div class="col-6">
+            <strong title="Tiempo de cocción">
+                <i class="far fa-clock"></i>
+            </strong>
+            {{ receta.coccion }}
+        </div>
+        <div class="col-6">
+            <strong>Descripción:</strong>
+            {{ receta.descripcion }}
+        </div>
+        <div class="col-6">
+            <img src="http://localhost:3000/uploads/{{ receta.imagen }}" style="width: 100%"/>
+        </div>
+        {# elementos: [elementoSchema] #}
+    </div>
 {% endblock %}
