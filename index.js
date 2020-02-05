@@ -31,7 +31,7 @@ let app = express();
 
 // Configurar la autenticación basada en sesiones.
 app.use(session({
-    secret: '1234',
+    secret: 'm*p6BKTEZnmANh2A@UChqTB5Um*d$6G&@hK4tu*#e3WXgQ3omvTxY^@bhfr$Y9Z9',
     resave: true,
     saveUninitialized: false
 }));
