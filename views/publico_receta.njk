@@ -5,11 +5,7 @@
 {% block contenido %}
     <div class="row">
         <div class="col-12">
-            <h1>Detalles de la receta</h1>
-        </div>
-        <div class="col-6">
-            <strong>Título:</strong>
-            {{ receta.titulo }}
+            <h1>{{ receta.titulo }}</h1>
         </div>
         <div class="col-6">
             <strong>Número de comensales:</strong>
@@ -40,7 +36,7 @@
             {{ receta.descripcion }}
         </div>
         <div class="col-6">
-            <img src="http://localhost:3000/uploads/{{ receta.imagen }}" style="width: 100%"/>
+            <img src="/uploads/{{ receta.imagen }}" style="width: 100%"/>
         </div>
         {# elementos: [elementoSchema] #}
     </div>

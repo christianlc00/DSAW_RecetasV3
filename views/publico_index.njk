@@ -6,21 +6,20 @@
     <h1>{{ titulo }}</h1>
     <div class="card-columns">
         {% for receta in recetas %}
-            <div class="card">
-                <img src="uploads/{{ receta.imagen }}" class="card-img-top" alt="...">
+            <a href="/receta/{{ receta._id }}" class="card text-body" style="text-decoration: none;">
+                <img src="/uploads/{{ receta.imagen }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ receta.titulo }}</h5>
                     <p class="card-text">{{ receta.comensales }} comensales</p>
                     <p class="card-text">
                         <small class="text-muted">
-                            {{ receta._id }}
                             <strong>Preparación:</strong>
-                            {{ receta.preparacion }} min. - <strong>Cocción:</strong>
+                            {{ receta.preparacion }} min.   <strong>Cocción:</strong>
                             {{ receta.coccion }} min.
                         </small>
                     </p>
                 </div>
-            </div>
+            </a>
         {% else %}
             <p>No se encontraron recetas.</p>
         {% endfor %}

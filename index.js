@@ -58,7 +58,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // method-override para preprocesar las peticiones adecuadamente y poder utilizar PUT y DELETE cuando corresponda.
-app.use(methodOverride(function(req, res) {
+app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         let method = req.body._method;
         delete req.body._method;
@@ -66,12 +66,12 @@ app.use(methodOverride(function(req, res) {
     }
 }));
 
-//multer para que se suban las imágenes a la carpeta public/uploads, anteponiéndoles como prefijo la fecha actual.
+// multer para que se suban las imágenes a la carpeta public/uploads, anteponiéndoles como prefijo la fecha actual.
 let storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, 'public/uploads')
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, Date.now() + "_" + file.originalname)
     }
 })
