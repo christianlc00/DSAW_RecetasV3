@@ -7,7 +7,7 @@
     <div class="card-columns">
         {% for receta in recetas %}
             <a href="/receta/{{ receta._id }}" class="card text-body" style="text-decoration: none;">
-                <img src="/uploads/{{ receta.imagen }}" class="card-img-top" alt="...">
+                <img src="/public/uploads/{{ receta.imagen }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ receta.titulo }}</h5>
                     <p class="card-text">{{ receta.comensales }} comensales</p>

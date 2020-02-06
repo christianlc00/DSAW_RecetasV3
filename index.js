@@ -66,6 +66,12 @@ app.use(methodOverride(function (req, res) {
     }
 }));
 
+// middleware para poder usar la sesión en las plantillas
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
 // multer para que se suban las imágenes a la carpeta public/uploads, anteponiéndoles como prefijo la fecha actual.
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -80,7 +86,7 @@ let upload = multer({
 });
 
 // Añadir la librería Bootstrap
-app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 // Asociar el enrutador routes/publico.js con el prefijo / (ruta raíz)

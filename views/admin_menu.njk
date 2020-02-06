@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Recetas</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Administración</a>
+            </li>
+        </ul>
+        <form method="GET" action="/buscar" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" name="s" placeholder="Buscar recetas..." aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+        {% if session.login %}
+            <a href="/auth/logout" class="text-white ml-3" style="text-decoration: none;">Cerrar sesión</a>
+        {% else %}
+            <a href="/auth/login" class="text-white ml-3" style="text-decoration: none;">Iniciar sesión</a>
+        {% endif %}
+    </div>
+</nav>

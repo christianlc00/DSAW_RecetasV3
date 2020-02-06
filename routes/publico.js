@@ -1,5 +1,5 @@
 const express = require('express');
-require(__dirname + '/../utils/auth.js');
+const auth = require(__dirname + '/../utils/auth.js');
 
 let Receta = require(__dirname + '/../models/receta.js');
 
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/buscar', autenticacion, (req, res) => {
+router.get('/buscar', auth, (req, res) => {
     let busqueda = req.query.s;
     Receta.find({
         titulo: new RegExp(busqueda, "i")

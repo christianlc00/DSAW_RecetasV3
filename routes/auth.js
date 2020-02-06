@@ -16,22 +16,14 @@ router.post('/login', (req, res) => {
     let login = req.body.login;
     let password = SHA256(req.body.password);
 
-    console.log(login);
-    console.log(req.body.password);
-    console.log(password);
-
     Usuario.find().then(usuarios => {
-        console.log(usuarios);
-
         let existeUsuario = usuarios.filter(usuario =>
             usuario.login == login && usuario.password == password
         );
 
         if (existeUsuario.length > 0) {
             req.session.login = existeUsuario[0].login;
-            res.render('auth_login', {
-                msg: 'Usuario logueado'
-            });
+            res.redirect('/admin');
         } else {
             res.render('auth_login', {
                 error: 'Usuario incorrecto'
@@ -47,5 +39,11 @@ router.post('/login', (req, res) => {
         });
     });
 });
+
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+
 
 module.exports = router;

@@ -8,36 +8,38 @@
             <h1>{{ receta.titulo }}</h1>
         </div>
         <div class="col-6">
-            <strong>Número de comensales:</strong>
-            {{ receta.comensales }}
+            <img src="/public/uploads/{{ receta.imagen }}" style="width: 100%"/>
         </div>
         <div class="col-6">
-            <strong title="Tiempo de preparación">
-                <i class="far fa-clock"></i>
-                <span class="fa-layers fa-fw">
-                    {# <i class="far fa-clock" data-fa-transform="rotate--90 grow-2"></i> #}
-                    <i class="fas fa-fire" data-fa-transform="grow-5"></i>
-                    <i class="fas fa-clock text-white" data-fa-transform="shrink-10 down-4.2 right-3.8"></i>
-                    {# <i class="fas fa-sun fa-inverse" data-fa-transform="shrink-10 up-2"></i>
-                    <i class="fas fa-moon fa-inverse" data-fa-transform="shrink-11 down-4.2 left-4"></i>
-                    <i class="fas fa-star fa-inverse" ></i> #}
-                </span>
-            </strong>
-            {{ receta.preparacion }}
+            <div class="row">
+                <div class="col-2">
+                    <strong title="Número de comensales">
+                        <i class="fas fa-user"></i>
+                    </strong>
+                    {{ receta.comensales }}
+                </div>
+                <div class="col-2">
+                    <strong title="Tiempo de preparación">
+                        <i class="far fa-clock"></i>
+                    </strong>
+                    {{ receta.preparacion }}
+                </div>
+                <div class="col-2">
+                    <strong title="Tiempo de cocción">
+                        <span class="fa-layers fa-fw">
+                            <i class="fas fa-fire" data-fa-transform="grow-5"></i>
+                            <i class="fas fa-clock text-white" data-fa-transform="shrink-10 down-4.2 right-3.8"></i>
+                        </span>
+                    </strong>
+                    {{ receta.coccion }}
+                </div>
+                <div class="col-12">
+                    <p class="mt-3">
+                        {{ receta.descripcion }}
+                    </p>
+                </div>
+                {# elementos: [elementoSchema] #}
+            </div>
         </div>
-        <div class="col-6">
-            <strong title="Tiempo de cocción">
-                <i class="far fa-clock"></i>
-            </strong>
-            {{ receta.coccion }}
-        </div>
-        <div class="col-6">
-            <strong>Descripción:</strong>
-            {{ receta.descripcion }}
-        </div>
-        <div class="col-6">
-            <img src="/uploads/{{ receta.imagen }}" style="width: 100%"/>
-        </div>
-        {# elementos: [elementoSchema] #}
     </div>
 {% endblock %}
