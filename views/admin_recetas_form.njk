@@ -1,0 +1,112 @@
+{% extends "admin_base.njk" %}
+{% block titulo %}
+    Nueva receta | Administración de Recetas
+{% endblock %}
+{% block contenido %}
+    <h1>{{ titulo }}</h1>
+    {% if receta %}
+    <form action="/admin/recetas/{{ receta._id }}?_method=PUT" method="post" enctype="multipart/form-data">
+    {% else %}
+    <form action="/admin/recetas" method="post" enctype="multipart/form-data">
+    {% endif %}
+        <div class="form-group row">
+            <label for="titulo" class="col-sm-2 col-form-label">Título</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="titulo" name="titulo" minlength="5" value="{{ receta.titulo }}" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="comensales" class="col-sm-2 col-form-label">Comensales</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <input type="number" class="form-control" id="comensales" name="comensales" min="1" value="{{ receta.comensales }}" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="preparacion" class="col-sm-2 col-form-label">Preparación</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="far fa-clock"></i>
+                        </div>
+                    </div>
+                    <input type="number" class="form-control" id="preparacion" name="preparacion" min="1" value="{{ receta.preparacion }}" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="coccion" class="col-sm-2 col-form-label">Coccion</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa-layers fa-fw">
+                                <i class="fas fa-fire" data-fa-transform="grow-5"></i>
+                                <i class="fas fa-clock text-white" data-fa-transform="shrink-10 down-4.2 right-3.8"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="number" class="form-control" id="coccion" name="coccion" min="0" value="{{ receta.coccion }}" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+            <div class="col-sm-10">
+                <textarea id="descripcion" name="descripcion" rows="5" class="form-control" style="resize: none;" required>{{ receta.descripcion }}</textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="imagen" class="col-sm-2 col-form-label">Imagen</label>
+            <div class="col-sm-10">
+                <img id="imgPreview" class="w-100 mb-3" {% if receta.imagen %} src="/public/uploads/{{ receta.imagen }}" {% endif %}>
+                <input type="file" class="form-control-file" id="imagen" name="imagen" value="{{ receta.imagen }}">
+            </div>
+        </div>
+        <div id="contenedorElementos">
+            {% for elemento in receta.elementos %}
+                <div class="card text-center mt-2">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Elemento {{loop.index}}</h5>
+                        <div style="cursor: pointer;">
+                            <div class="fas fa-times text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="ingrediente">Ingrediente</label>
+                            <div class="col-sm-10"><input class="form-control" type="text" name="elementos[ingrediente]" value="{{ elemento.ingrediente }}"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="cantidad">Cantidad</label>
+                            <div class="col-sm-10"><input class="form-control" type="number" name="elementos[cantidad]" value="{{ elemento.cantidad }}"></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="unidad">Unidad</label>
+                            <div class="col-sm-10"><input class="form-control" type="text" name="elementos[unidad]" value="{{ elemento.unidad }}"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted"></div>
+                </div>                
+            {% endfor %}
+        </div>
+        <div class="form-group row">
+            <button id="agregarElemento" type="button" class="btn btn-secondary w-100 mt-2" style="margin: 0px 15px;" title="Agregar un nuevo elemento a la receta">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary mt-2">Crear nueva receta</button>
+            </div>
+        </div>
+    </form>
+    <script src="/public/js/formulario_recetas.js"></script>
+{% endblock %}
