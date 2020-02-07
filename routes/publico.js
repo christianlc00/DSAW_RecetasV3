@@ -12,12 +12,7 @@ router.get('/', (req, res) => {
             recetas: resultado
         });
     }).catch(error => {
-        res.render('publico_error', {
-            error: {
-                titulo: 'Error en la aplicación',
-                mensaje: error
-            }
-        });
+        res.render('publico_error');
     });
 });
 
@@ -31,12 +26,7 @@ router.get('/buscar', auth, (req, res) => {
             recetas: resultado
         });
     }).catch(error => {
-        res.render('publico_error', {
-            error: {
-                titulo: 'Error en la aplicación',
-                mensaje: error
-            }
-        });
+        res.render('publico_error');
     });
 });
 
@@ -45,7 +35,7 @@ router.get('/receta/:id', (req, res) => {
         res.render('publico_receta', {
             receta: resultado
         });
-    }).catch(error => {
+    }).catch(() => {
         res.render('publico_error', {
             error: {
                 titulo: 'Error',

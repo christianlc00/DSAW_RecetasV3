@@ -28,12 +28,7 @@ router.get('/', auth, (req, res) => {
             recetas: resultado
         });
     }).catch(error => {
-        res.render('publico_error', {
-            error: {
-                titulo: 'Error en la aplicación',
-                mensaje: error
-            }
-        });
+        res.render('admin_error');
     });
 });
 
@@ -49,26 +44,21 @@ router.get('/recetas/editar/:id', auth, (req, res) => {
             titulo: 'Editar receta',
             receta: receta
         });
-    }).catch(error => {
-        res.render('publico_error', {
+    }).catch(() => {
+        res.render('admin_error', {
             error: {
-                titulo: 'Error en la aplicación',
-                mensaje: error
+                titulo: 'Error',
+                mensaje: 'Receta no encontrada'
             }
         });
     });
 });
 
 router.delete('/recetas/:id', auth, (req, res) => {
-    Receta.findByIdAndDelete(req.params.id).then(receta => {
-        res.redirect('/admin');
-    }).catch(error => {
-        res.render('publico_error', {
-            error: {
-                titulo: 'Error en la aplicación',
-                mensaje: error
-            }
-        });
+    Receta.findByIdAndDelete(req.params.id).then(() => {
+        res.redirect(req.baseUrl);
+    }).catch(() => {
+        res.render('publico_error');
     });
 });
 
@@ -110,9 +100,11 @@ router.post('/recetas', auth, upload.single('imagen'), (req, res) => {
 
     nuevaReceta = new Receta(nuevaReceta);
 
-    nuevaReceta.save();
-
-    res.redirect('/admin');
+    nuevaReceta.save().then(() => {
+        res.redirect(req.baseUrl);
+    }).catch(() => {
+        res.render('admin_error');
+    });
 });
 
 router.put('/recetas/:id', auth, upload.single('imagen'), (req, res) => {
@@ -131,7 +123,7 @@ router.put('/recetas/:id', auth, upload.single('imagen'), (req, res) => {
             elementos.unidad = [elementos.unidad];
         }
     
-        for(let i; i < elementos.ingrediente.length; i++) {
+        for(let i = 0; i < elementos.ingrediente.length; i++) {
             aElementos.push({
                 ingrediente: elementos.ingrediente[i],
                 cantidad: elementos.cantidad[i],
@@ -153,13 +145,11 @@ router.put('/recetas/:id', auth, upload.single('imagen'), (req, res) => {
 
     Receta.findByIdAndUpdate(req.params.id, {
         $set: nuevaReceta
-    }).then(resultado => {
-        
-    }).catch(error => {
-
+    }).then(() => {
+        res.redirect(req.baseUrl);
+    }).catch(() => {
+        res.render('admin_error');
     });
-
-    res.redirect('/admin');
 });
 
 module.exports = router;

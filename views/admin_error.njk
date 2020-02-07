@@ -1,0 +1,14 @@
+{% extends "admin_base.njk" %}
+{% block titulo %}
+    Error | Recetas
+{% endblock %}
+{% block contenido %}
+    <div class="alert alert-danger mt-5" role="alert">
+        {% if error %}
+        <h4 class="alert-heading">{{ error.titulo }}</h4>
+        <p>{{ error.mensaje }}</p>
+        {% else %}
+        <h4 class="alert-heading">Error en la aplicación</h4>
+        {% endif %}
+    </div>
+{% endblock %}

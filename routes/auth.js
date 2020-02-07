@@ -6,13 +6,10 @@ let Usuario = require(__dirname + '/../models/usuario.js');
 let router = express.Router();
 
 router.get('/login', (req, res) => {
-    res.render('auth_login', {
-        error: ''
-    });
+    res.render('auth_login');
 });
 
 router.post('/login', (req, res) => {
-    let error; // = 'Usuario incorrecto';
     let login = req.body.login;
     let password = SHA256(req.body.password);
 
@@ -29,13 +26,9 @@ router.post('/login', (req, res) => {
                 error: 'Usuario incorrecto'
             });
         }
-    }).catch(error => {
-        console.log(error);
+    }).catch(() => {
         res.render('auth_login', {
-            error: {
-                titulo: 'Usuario incorrecto',
-                mensaje: error
-            }
+            error: 'Usuario incorrecto'
         });
     });
 });
